@@ -42,7 +42,7 @@ carrier sense multiple access (csma) waits (for a random time) current transfer 
 csma/collision detection: checks for collision signals in the channel (different signal amplitude)
 that's why coaxial cables can be max N metres long (so that less collisions happen)
 
-MAC (MEDIA ACCESS CONTROL) ADDRESSES, maca
+MAC (MEDIA ACCESS CONTROL) ADDRESSES, maca, 6  bits
 a.k.a. lan address, physical address, device address, ethernet address, ...
 attached at the manufacturing time of the network card
   an analogy for addresses: ip ~ street name  mac ~ ss number
@@ -50,3 +50,60 @@ it's possible to change programmatically
   mac spoofing
   IEEE provides macas (/w a single ieee bit mask, can create 17 m different addresses)
   broadcast / default maca: 00-00-00-00-00-00
+provide mac address to computers in the local network
+using arp, resolve the mac addresses
+each router and host has a mapping table (analogous to dns [name discovery protocol, ndp])
+  ip;mac;ttl
+  ttl is typically 20 m
+  broadcast message to get info from other hosts
+  obviously, the edge router of the local network knows mac addresses
+  mac src, dst change after passing a router; ips stay the same
+
+ETHERNET
+simple, cheap and easy to extend routers and switches
+ieee-standardized lan network
+  classic 10 mbps
+  fast 100 mbps
+  gigabit 1000 mbps
+  ...
+other local network standards
+  wlan
+  fddi
+  token ring
+must be less than 100 m to the hub
+network cards handle collisions
+switches are more and more used to create point-to-point connections (and get rid off collisions)
+preample is included in an ethernet frame
+data minimum is 46 bits
+  6 bits for tcp/ip data (fill if needed)
+  to handle collisions
+switch can handle different sending rates, hub cannot
+  store and forward, buffering
+  if not found in table then broadcast (flooding)
+  self-learning
+
+WIRELESS LINKS
+challenges are
+  hosts changing networks
+  signals soften ja reflect
+  other signals disturb
+802.11.\d – ieee standards for wifi
+mobile networks are different
+ad hoc networks
+  self-organising
+  bluetooth: 802.15.1
+  hotspot
+   collisions when networks align partially
+no collision detection (csma/cd)
+collision avoidance (csma/ca)
+
+questions
+  how to build a local network?
+  ip vs mac address
+  arp protocol vs arp table
+  backwards learning and switch table
+  detecting bit errors
+  crc
+  sending channel split
+  csma/cd
+  book p. 501
