@@ -1,0 +1,52 @@
+BOOK: Computer Networking: A Top-Down Approach, Chapter 5, 6th ed
+LECTURE: Tietoliikenteen perusteet, 6, kevät 2019
+
+LEARNING GOALS
+Can explain
+  MAC-address
+   bit error detection and correction
+   ARP-protocol
+   reserving transfer channel and usage
+   combining computers into a local network
+
+THE LINK LAYER
+the link layer is implemented on top of a driver and is attached to e.g. a PCIE expansion slot.
+one bit errors are checked with the Hamming Code.
+when there is an error, either "ask" for a new block or do correction with extra check bits (Reed-Salomon).
+  Hamming Code was covered in the Computer Organisation course
+  correction is not part of learning goals
+check the whole block with checksums – not performant
+CRC – easy to implement with hardware and is reliable
+  polynomic arithmetic (polynomial code)
+  many check bits, can identify torrents of errors
+  virittäjäpolynomi
+there are severals but both sender and receiver must use the same mechamism
+
+SHARED CHANNELS
+point-to-point (kaksipisteyhteys)
+  ppp-protocol, dial-up access
+  less collisions
+broadcast
+  more collisions
+the trend is towards point-to-point
+hub-based networks
+only one can send at once, otherwise, kakofonia prevails. there will be bit mess if multiple senders at once
+
+multiple access protocol can handle those
+can send all at once and utilise the whole channel and everyone gets same amount of time
+the goal is to do it simply and cheaply (?)
+channel division protocols (use this, I use that)
+  random access protocols
+aloha uses randomisation and is very inefficient (16-37 % utilization rate)
+carrier sense multiple access (csma) waits (for a random time) current transfer to complete before hijacking the channel
+csma/collision detection: checks for collision signals in the channel (different signal amplitude)
+that's why coaxial cables can be max N metres long (so that less collisions happen)
+
+MAC (MEDIA ACCESS CONTROL) ADDRESSES, maca
+a.k.a. lan address, physical address, device address, ethernet address, ...
+attached at the manufacturing time of the network card
+  an analogy for addresses: ip ~ street name  mac ~ ss number
+it's possible to change programmatically
+  mac spoofing
+  IEEE provides macas (/w a single ieee bit mask, can create 17 m different addresses)
+  broadcast / default maca: 00-00-00-00-00-00
